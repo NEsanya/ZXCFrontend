@@ -1,6 +1,6 @@
 #include <iostream>
 
 int main(void) {
-    std::cout << "meow\n";
-    return 0;
+  std::cout << "Hello, world!\n";
+  return 0;
 }

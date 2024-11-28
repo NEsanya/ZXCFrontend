@@ -31,8 +31,9 @@ override CPPFLAGS += -O2 -Os -DNDEBUG
 override LDFLAGS += -Wl,-O1
 endif
 
+.PHONY: all
 .DEFAULT_GOAL: all
-all: ${BUILDDIR}/index.html ${BUILDDIR}/index.css ${BUILDDIR}/index.js ${BUILDDIR}/index.wasm
+all: ${BUILDDIR} ${BUILDDIR}/index.html ${BUILDDIR}/index.css ${BUILDDIR}/index.js ${BUILDDIR}/index.wasm
 
 define cppdef
 $(patsubst %.cpp, %.o, $1): $1 $(shell ${CPP} $1 ${CPPFLAGS} -E | grep -oe "\.\?/.*\.hpp" | sort -u)
@@ -46,22 +47,29 @@ $(foreach src, ${SRCS}, $(eval $(call cppdef, ${src})))
 ${BUILDDIR}:
 	mkdir $@
 
+BROWSER_WASI_ARCHIVE = ${BUILDDIR}/browser_wasi.tar.gz
+${BUILDDIR}/browser_wasi/:
+	curl -sSL https://github.com/bjorn3/browser_wasi_shim/archive/refs/tags/v0.3.0.tar.gz > ${BROWSER_WASI_ARCHIVE}
+	tar -xf ${BROWSER_WASI_ARCHIVE} -C ${BUILDDIR}
+	rm ${BROWSER_WASI_ARCHIVE}
+	cd ${BUILDDIR}/browser_wasi_shim-0.3.0/ && npm i && npm run build
+	cd ${BUILDDIR} && mv browser_wasi_shim-0.3.0/dist $@
+	rm -rf ${BUILDDIR}/browser_wasi_shim-0.3.0/
+
+
 ${BUILDDIR}/index.wasm: ${OBJS} ${BUILDDIR}
 	${CPP} ${OBJS} ${LDFLAGS} -o $@
 
 ${BUILDDIR}/index.html: ${ROOT_DIR}/src/index.html
-	@cp $^ $@
-	@echo copying index.html
-
+	cp ${ROOT_DIR}/src/index.html $@
 ${BUILDDIR}/index.css: ${ROOT_DIR}/src/index.css
-	@cp $^ $@
-	@echo copying index.css
-${BUILDDIR}/index.js: ${ROOT_DIR}/src/index.ts ${ROOT_DIR}/tsconfig.json
+	cp ${ROOT_DIR}/src/index.css $@
+${BUILDDIR}/index.js: ${BUILDDIR}/browser_wasi/ ${ROOT_DIR}/src/index.ts ${ROOT_DIR}/tsconfig.json
 	tsc -p ${ROOT_DIR}/tsconfig.json --outDir ${BUILDDIR}
 
 .PHONY: clean
 clean:
-	rm -f ${OBJS} ${BUILDDIR}/index.wasm
+	rm -rf ${OBJS} ${BUILDDIR}
 
 .PHONY: compile_commands
 compile_commands: ${BUILDDIR}
