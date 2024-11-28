@@ -1,0 +1,10 @@
+{
+    "compilerOptions": {
+        "target": "ES2016",
+        "module": "esnext",
+        "removeComments": true,
+        "lib": ["ES2020", "DOM"]
+    },
+    "jsx": "react",
+    "files": ["src/index.ts"]
+}
