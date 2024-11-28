@@ -33,7 +33,7 @@ endif
 
 .PHONY: all
 .DEFAULT_GOAL: all
-all: ${BUILDDIR} ${BUILDDIR}/index.html ${BUILDDIR}/index.css ${BUILDDIR}/index.js ${BUILDDIR}/index.wasm
+all: ${BUILDDIR} ${BUILDDIR}/favicon.ico ${BUILDDIR}/index.html ${BUILDDIR}/index.css ${BUILDDIR}/index.js ${BUILDDIR}/index.wasm
 
 define cppdef
 $(patsubst %.cpp, %.o, $1): $1 $(shell ${CPP} $1 ${CPPFLAGS} -E | grep -oe "\.\?/.*\.hpp" | sort -u)
@@ -60,6 +60,8 @@ ${BUILDDIR}/browser_wasi/:
 ${BUILDDIR}/index.wasm: ${OBJS} ${BUILDDIR}
 	${CPP} ${OBJS} ${LDFLAGS} -o $@
 
+${BUILDDIR}/favicon.ico:
+	cp ${ROOT_DIR}/src/favicon.ico $@
 ${BUILDDIR}/index.html: ${ROOT_DIR}/src/index.html
 	cp ${ROOT_DIR}/src/index.html $@
 ${BUILDDIR}/index.css: ${ROOT_DIR}/src/index.css
