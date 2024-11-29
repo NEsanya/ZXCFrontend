@@ -1,64 +1,70 @@
-<!doctype html>
-<html>
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <title>Market Corrector</title>
-        <meta name="description" content="">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="./index.css"></link>
-    </head>
-    <body>
-        <div id="webcrumbs">
-            <div class="w-[800px] bg-white shadow rounded-lg p-6">
-                <div class="flex justify-center mb-6 gap-4">
-                    <button class="h-[40px] w-[40px] flex items-center justify-center rounded-full border border-primary-500 text-primary-500">
-                        1
-                    </button>
-                    <button class="h-[40px] w-[40px] flex items-center justify-center rounded-full border border-primary-500 text-primary-500">
-                        2
-                    </button>
-                    <button class="h-[40px] w-[40px] flex items-center justify-center rounded-full border border-primary-500 text-primary-500">
-                        3
-                    </button>
-                    <button class="h-[40px] w-[40px] flex items-center justify-center rounded-full border border-primary-500 text-primary-500">
-                        4
-                    </button>
-                    <button class="h-[40px] w-[40px] flex items-center justify-center rounded-full border border-primary-500 text-primary-500">
-                        5
-                    </button>
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="index.css">
+</head>
+<body>
+    <div class="grand">
+        <div class="header">
+            <span id="logo_one">Market</span><span id="logo_two">Corrector</span>
+        </div>
+        <div class="main">
+            <div class="window">
+                <div class="circles-row" id="vendor-buttons">
+                    <div class="circle vendor-selected" id="vendor-button-1">1</div>
                 </div>
-                <div class="flex flex-col gap-4">
-                    <div class="flex gap-2">
-                        <input type="text" class="w-full p-2 rounded-md border border-neutral-300" placeholder="Название товара"/>
+                <div class="area">
+                    <div class="name">
+                        <textarea class="input_name" placeholder="Название"></textarea>
                     </div>
-                    <div class="flex gap-2">
-                        <input type="text" class="w-full p-2 rounded-md border border-neutral-300" placeholder="Брэнд"/>
+                    <div class="name">
+                        <textarea class="input_name" placeholder="Бренд"></textarea>
                     </div>
-                    <div class="flex gap-2">
-                        <input type="text" class="w-full p-2 rounded-md border border-neutral-300" placeholder="Цена"/>
+                    <div class="name">
+                        <textarea class="input_name" placeholder="Цена"></textarea>
                     </div>
-                    <div class="flex gap-2">
-                        <input type="text" class="w-full p-2 rounded-md border border-neutral-300" placeholder="Описание"/>
+                    <div class="name">
+                        <textarea class="input_name" placeholder="Описание"></textarea>
                     </div>
-                    <div class="flex gap-2">
-                        <input type="text" class="w-full p-2 rounded-md border border-neutral-300" placeholder="Баркод"/>
+                    <div class="name">
+                        <textarea class="input_name" placeholder="Баркод"></textarea>
                     </div>
-                    <div class="flex gap-2">
-                        <input type="text" class="w-full p-2 rounded-md border border-neutral-300" placeholder="Артикул"/>
+                    <div class="name">
+                        <textarea class="input_name" placeholder="Артикул"></textarea>
                     </div>
-                    <div class="flex gap-2">
-                        <input type="text" class="w-full p-2 rounded-md border border-neutral-300" placeholder="Скидка"/>
+                    <div class="name">
+                        <textarea class="input_name" placeholder="Скидка"></textarea>
                     </div>
                 </div>
-                <div class="mt-6 flex gap-4">
-                    <button class="bg-primary-500 py-2 px-6 rounded-md">Загрузить</button>
-                    <button class="bg-neutral-300 text-white py-2 px-6 rounded-md">Отмена</button>
-                    <button class="bg-neutral-300 text-white py-2 px-6 rounded-md">Импорт</button>
-                    <button class="bg-primary-500 bg-red py-2 px-6 rounded-md">Автономность</button>
+                <div class="button-container">
+                    <button class="button button-green noselect">Начать</button>
+                    <button class="button button-yellow noselect">Экспортировать</button>
+                    <button class="button button-yellow noselect">Импортировать</button>
+                    <button class="button button-red noselect">Автономный режим</button>
+                    <button class="button button-green noselect" id="vendor-add-button">+</div>
                 </div>
             </div>
         </div>
-        <script src="./index.js" type="module"></script>
-    </body>
+    </div>
+    <div class="footer">
+        <div class="circles-col">
+        <div class="pos">
+            <div class="circle" id="c-1"></div>
+            <p>- присутствует критичная ошибка</p>
+        </div>
+        <div class="pos">
+            <div class="circle" id="c-2"></div>
+            <p>- присутствует не критичная ошибка</p>
+        </div>
+        <div class="pos">
+            <div class="circle" id="c-3"></div>
+            <p>- ошибок нет</p>
+        </div>
+        </div>
+    </div>
+    <script src="index.js"></script>
+</body>
 </html>
