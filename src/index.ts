@@ -11,7 +11,7 @@ async function initializeWasm(): Promise<void> {
     //@ts-ignore
     browserWasi = await import("./browser_wasi/index.js");
 }
-function startWasmModule(args: string, error_cb: (arg: string) => void): Promise<void> {
+function startWasmModule(args: string[], error_cb: (arg: string) => void): Promise<void> {
     return new Promise((resolve, reject) => {
         if (!wasmInitializedCheck())
             reject(new Error("Initialize wasm module"));
@@ -27,9 +27,6 @@ function startWasmModule(args: string, error_cb: (arg: string) => void): Promise
             []
         ];
 
-        const encoder = new TextEncoder();
-        const encodedString = encoder.encode(args);
-
         const wasi = new WASI(args, [], fds);
         WebAssembly.instantiate(wasm, {
             env: {
@@ -38,43 +35,14 @@ function startWasmModule(args: string, error_cb: (arg: string) => void): Promise
                     maximum: 65536,
                     shared: false
                 }),
-                dataLength: () => encodedString.byteLength
+                dataLength: () => 256
             },
             wasi_snapshot_preview1: wasi.wasiImport
         }).then((inst) => wasi.start(inst));
     })
 }
 
-class Offer {
-    constructor (public name: string,
-                 public vendor: string,
-                 public price: number,
-                 public description: string,
-                 public barcode: number,
-                 public article: number,
-                 public discount: number) {}
-
-    public toString(): string {
-        return JSON.stringify({
-            name: this.name,
-            vendor: this.vendor,
-            price: this.price,
-            description: this.description,
-            barcode: this.barcode,
-            article: this.article,
-            discount: this.discount
-        });
-    }
-}
-
-let offers: Offer[] = []
-
-const vendorButtons = document.getElementById("vendor-buttons");
-document.getElementById("vendor-add-button").addEventListener("click", () => {
-    const newButton = document.createElement("div");
-    const id = vendorButtons.childElementCount + 1
-    newButton.className = "circle noselect";
-    newButton.id = `vendor-button-${id}`;
-    newButton.textContent = id.toString();
-    vendorButtons.appendChild(newButton);
-});
+(async () => {
+	await initializeWasm();
+	await startWasmModule([], console.warn);
+})()

@@ -18,33 +18,38 @@
                 </div>
                 <div class="area">
                     <div class="name">
-                        <textarea class="input_name" placeholder="Название"></textarea>
+                        <textarea class="input_name" placeholder="Название" id="name-text"></textarea>
                     </div>
                     <div class="name">
-                        <textarea class="input_name" placeholder="Бренд"></textarea>
+                        <textarea class="input_name" placeholder="Бренд" id="brand-text"></textarea>
                     </div>
                     <div class="name">
-                        <textarea class="input_name" placeholder="Цена"></textarea>
+                        <textarea class="input_name" placeholder="Цена" id="price-text"></textarea>
                     </div>
                     <div class="name">
-                        <textarea class="input_name" placeholder="Описание"></textarea>
+                        <textarea class="input_name" placeholder="Описание" id="description-text"></textarea>
                     </div>
                     <div class="name">
-                        <textarea class="input_name" placeholder="Баркод"></textarea>
+                        <textarea class="input_name" placeholder="Баркод" id="barcode-text"></textarea>
                     </div>
                     <div class="name">
-                        <textarea class="input_name" placeholder="Артикул"></textarea>
+                        <textarea class="input_name" placeholder="Артикул" id="article-text"></textarea>
                     </div>
                     <div class="name">
-                        <textarea class="input_name" placeholder="Скидка"></textarea>
+                        <textarea class="input_name" placeholder="Скидка" id="discount-text"></textarea>
                     </div>
                 </div>
                 <div class="button-container">
-                    <button class="button button-green noselect">Начать</button>
-                    <button class="button button-yellow noselect">Экспортировать</button>
-                    <button class="button button-yellow noselect">Импортировать</button>
-                    <button class="button button-red noselect">Автономный режим</button>
+                    <button class="button button-green noselect" id="start-btn">Начать</button>
+                    <button class="button button-yellow noselect" id="export-btn">Экспортировать</button>
+                    <button class="button button-red noselect" id="auto-btn">Автономный режим</button>
                     <button class="button button-green noselect" id="vendor-add-button">+</div>
+                    <textarea class="input_name" placeholder="Экспорт ссылка"></textarea>
+                    <textarea class="input_name" placeholder="Импорт ссылка"></textarea>
+                    <label class="button button-yellow noselect">
+                        Импортировать
+                        <input type="file" id="import-input" hidden></input>
+                    </label>
                 </div>
             </div>
         </div>
