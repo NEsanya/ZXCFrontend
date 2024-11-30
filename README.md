@@ -11,7 +11,7 @@
 ### Сборка
 
 ``` shell
-$ make # SYSROOT=<путь до wasi-sysroot> если не в /usr/share/wasi-sysroot
+$ make
 ```
 
 После этого в папке появятся нужные index.html, index.css, index.js, index.wasm и browser_wasi
